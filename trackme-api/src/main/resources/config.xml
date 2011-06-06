@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration>
+
+	<header></header>
+
+	<override>
+		<properties fileName="db.properties" />
+	</override>
+
+	<additional></additional>
+
+</configuration>

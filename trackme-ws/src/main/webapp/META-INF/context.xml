@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+
+	<Resource 
+		name="jdbc/trackme" 
+		auth="Container" 
+		type="javax.sql.DataSource" 
+	    driverClassName="${mysql.conf.driverClassName}" 
+	    maxActive="20"
+	    maxIdle="5"
+	   	maxWait="10000" 
+	    url="${mysql.conf.url}"
+	    username="${mysql.conf.username}" 
+	    password="${mysql.conf.password}" 
+	    validationQuery="select 1" />
+
+</Context>

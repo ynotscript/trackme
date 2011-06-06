@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ibatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Apache iBATIS Ibator Configuration 1.0//EN" "http://ibatis.apache.org/dtd/ibator-config_1_0.dtd" >
+<ibatorConfiguration>
+
+	<classPathEntry 
+		location="C:\Program Files\maven_wwf\m2\repository\mysql\mysql-connector-java\5.0.6\mysql-connector-java-5.0.6.jar" />
+	
+	<ibatorContext 
+		id="trackme" 
+		targetRuntime="Ibatis2Java5" 
+		defaultModelType="flat">
+	
+		<ibatorPlugin 
+			type="org.apache.ibatis.ibator.plugins.SqlMapConfigPlugin">
+  			<property 
+  				name="targetProject" 
+  				value="trackme-api/src/main/resources" /> 
+  			<property 
+  				name="targetPackage" 
+  				value="com.ynotscript.trackme.api.db.ibatis.configs" /> 
+  			<property 
+  				name="fileName" 
+  				value="handset-sqlmap-config.xml" /> 
+  		</ibatorPlugin>
+	
+		<jdbcConnection 
+			driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/dbname" 
+			userId="dbuser"
+			password="dbpassword">
+		</jdbcConnection>
+		
+		<javaModelGenerator 
+			targetPackage="com.ynotscript.trackme.api.db.ibatis.models"
+			targetProject="trackme-api/src/main/java">
+		</javaModelGenerator>
+		
+		<sqlMapGenerator 
+			targetPackage="com.ynotscript.trackme.api.db.ibatis.maps"
+			targetProject="trackme-api/src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		
+		<daoGenerator
+			targetPackage="com.ynotscript.trackme.api.db.ibatis.daos"
+			targetProject="trackme-api/src/main/java" 
+			type="GENERIC-SI" />
+			
+		<table tableName="trackme_handset" domainObjectName="Handset" >
+			<property name="runtimeTableName" value="$prefix$handset"/>
+			<generatedKey column="id_handset" sqlStatement="MySql" identity="true" />
+			<columnOverride column="id_handset" property="handsetId" />
+			<columnOverride column="id_handset_partner" property="handsetPartnerId" />
+		</table>
+		
+	</ibatorContext>
+</ibatorConfiguration>
+

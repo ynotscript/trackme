@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOGGER" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+<log4j:configuration debug="false">
+	<appender name="CONSOLE" class="org.apache.log4j.rolling.RollingFileAppender">
+		<param name="file" value="${catalina.base}/logs/catalina.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="UTF-8" />
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+			<param name="FileNamePattern" value="${catalina.base}/logs/%d_catalina.gz" />
+		</rollingPolicy>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="TRACKME" class="org.apache.log4j.rolling.RollingFileAppender">
+	    <param name="file" value="${catalina.base}/logs/trackme-ws.log" />
+	    <param name="append" value="true" />
+	    <param name="encoding" value="UTF-8" />
+	    <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+	    	<param name="FileNamePattern" value="${catalina.base}/logs/%d_trackme-ws.gz" />
+	    </rollingPolicy>
+	    
+	    <layout class="org.apache.log4j.PatternLayout">
+	    	<param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+	    </layout>
+	</appender>
+	
+	<logger name="com.ynotscript.trackme" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="TRACKME" />
+	</logger>
+
+	<root>
+		<priority value="info" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</log4j:configuration>

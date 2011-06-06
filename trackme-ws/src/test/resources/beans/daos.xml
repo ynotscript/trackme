@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xmlns:cxf="http://cxf.apache.org/core" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
+
+	<!-- Managers -->
+
+	<bean id="trackManager"
+		class="com.ynotscript.trackme.api.manager.impl.TrackManagerImpl">
+		<property name="applicationDAO" ref="applicationDAO" />
+		<property name="handsetHasApplicationDAO" ref="handsetHasApplicationDAO" />
+		<property name="handsetDAO" ref="handsetDAO" />
+		<property name="partnerDAO" ref="partnerDAO" />
+	</bean>
+
+	<!-- iBATIS DAOs -->
+
+	<bean id="applicationDAO"
+		class="com.ynotscript.trackme.api.db.ibatis.daos.ApplicationDAOImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="handsetHasApplicationDAO"
+		class="com.ynotscript.trackme.api.db.ibatis.daos.HandsetHasApplicationDAOImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="handsetDAO"
+		class="com.ynotscript.trackme.api.db.ibatis.daos.HandsetDAOImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="operatingSystemDAO"
+		class="com.ynotscript.trackme.api.db.ibatis.daos.OperatingSystemDAOImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="partnerDAO"
+		class="com.ynotscript.trackme.api.db.ibatis.daos.PartnerDAOImpl">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<!-- SqlMapClient instances -->
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/dbname" />
+		<property name="username" value="dbuser" />
+		<property name="password" value="dbpassword" />
+	</bean>
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:com/ynotscript/trackme/api/db/ibatis/configs/sqlmap-config.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+</beans>
